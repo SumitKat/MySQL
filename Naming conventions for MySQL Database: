@@ -1,0 +1,46 @@
+Naming conventions for MySQL Database:
+
+
+Database name should be same as that of project name:
+ex->  if project name is "MY Web Site" , database name should be "mywebsite".
+
+
+Table name shoud start with package name in which it resides:
+ex->  if the package name is "Web App Development" , table names should be like ,   "CREATE TABLE wad_users;"
+
+
+Field Name should be prefixed with 2-4 letters of table name and field name should always be small letters seprated by '_'
+ex->  if the table name is users , fields name should be like , "user_id", "user_first_name".
+
+
+All fields except auto increment, text and date must be defined NOT NULL and DEFAULT.
+ex->  user_id  INT UNSIGNED AUTO_INCREMENT , 
+	  user_first_name  VARCHAR(30)  DEFAULT '' NOT NULL;
+
+
+Reserved words in queries should be upper case to increase the readibilty:
+ex->  SELECT user_id, user_first_name 
+	  FROM wad_users
+	  WHERE user_id = 'something';  
+
+
+PHP must be defined and escaped before query:
+ex-> <?php
+		$email=addslashes($_POST['email']);
+		if(empty($email)) {
+			return false;
+		}
+		$query="SELECT * from wad_users where email='{$email}'";
+	 ?>
+
+
+All alteration for the table must be reflected in the databasename.sql file. It should start like mywebsite-1.0.0.sql.
+-> If there are only some table alteration than it should be increased by 0.0.1
+-> If there is some new table creation than it should be increased by 0.1
+-> If Some tables are dropped than it should be increase by 1.0
+-> All revision should follow a patter major.minor.[build[.revision]]
+-> All version should be save in same directory
+
+
+
+
